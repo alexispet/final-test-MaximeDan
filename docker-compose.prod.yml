@@ -3,3 +3,5 @@ services:
     image: ghcr.io/alexispet/final-test-maximedan/express:develop
     environment:
       - NODE_ENV=production
+    ports:
+      - 3000:3000
