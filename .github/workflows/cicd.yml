@@ -9,6 +9,7 @@ env:
   DB_DATABASE: ${{ secrets.DB_DATABASE }}
   DB_USER: ${{ secrets.DB_USER }}
   DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+  NODE_ENV: development
 
 jobs:
   dependency-audit:
