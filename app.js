@@ -1,31 +1,31 @@
-import express from 'express';
-import mariadb from 'mariadb';
+import express from "express";
+import mariadb from "mariadb";
 
 const app = express();
 let port = process.env.PORT || 3000;
 
 // Configurations de la base de données
 const pool = mariadb.createPool({
-   host: process.env.DB_HOST || 'localhost',
- user: process.env.DB_USER || 'votre_utilisateur',
- password: process.env.DB_PASSWORD || 'votre_mot_de_passe',
- database: process.env.DB_DATABASE || 'votre_base_de_donnees',
- connectionLimit: 5
+  host: process.env.DB_HOST || "localhost",
+  user: process.env.DB_USER || "votre_utilisateur",
+  password: process.env.DB_PASSWORD || "votre_mot_de_passe",
+  database: process.env.DB_DATABASE || "votre_base_de_donnees",
+  connectionLimit: 5,
 });
 
-app.get('/', async (req, res) => {
-  res.status(200).json({ message: 'Bienvenue sur l\'API de votre application' });
+app.get("/", async (req, res) => {
+  res.status(200).json({ message: "Bienvenue sur l'API de votre application" });
 });
 
-app.get('/post', async (req, res) => {
+app.get("/post", async (req, res) => {
   let conn;
   try {
     conn = await pool.getConnection();
-    const rows = await conn.query('SELECT * FROM posts');
+    const rows = await conn.query("SELECT * FROM posts");
     res.json(rows);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Erreur lors de la récupération des posts' });
+    res.status(500).json({ error: "Erreur lors de la récupération des posts" });
   } finally {
     if (conn) return conn.end();
   }
@@ -38,8 +38,8 @@ function findAvailablePort() {
       server.close(() => resolve(foundPort));
     });
 
-    server.on('error', (err) => {
-      if (err.code === 'EADDRINUSE') {
+    server.on("error", (err) => {
+      if (err.code === "EADDRINUSE") {
         port++;
         server.close();
       } else {
@@ -51,14 +51,14 @@ function findAvailablePort() {
 
 // Lancer le serveur en utilisant le port disponible
 findAvailablePort()
-    .then((availablePort) => {
-      port = availablePort;
-      app.listen(port, () => {
-        console.log(`Serveur en cours d'exécution sur le port ${port}`);
-      });
-    })
-    .catch((err) => {
-      console.error('Erreur lors du démarrage du serveur:', err);
+  .then((availablePort) => {
+    port = availablePort;
+    app.listen(port, () => {
+      console.log(`Serveur en cours d'exécution sur le port ${port}`);
     });
+  })
+  .catch((err) => {
+    console.error("Erreur lors du démarrage du serveur:", err);
+  });
 
 export default app;
