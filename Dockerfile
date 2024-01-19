@@ -14,6 +14,8 @@ COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/app.js .
 COPY --from=build /app/database ./database
 
+RUN ls -la
+
 EXPOSE 3000
 
 COPY docker/app/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
