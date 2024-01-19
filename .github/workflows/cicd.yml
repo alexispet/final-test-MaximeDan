@@ -45,12 +45,17 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Lint Code Base
-        uses: github/super-linter@v4
-        env:
-          VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: master
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '21.5.0'
+
+      - name: Install ESLint
+        run: |
+          npm install
+
+      - name: Run ESLint
+        run: npm run lint
 
   build-docker:
     runs-on: ubuntu-latest
