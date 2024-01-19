@@ -129,3 +129,14 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+    
+  notify:
+    needs: [build-docker-dev, build-docker-prod]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Shoutrrr
+        uses: containrrr/shoutrrr-action@v1
+        with:
+          url: ${{ secrets.NOTIF_URL }}
+          title: Deployed ${{ github.sha }} on server
+          message: See changes at ${{ github.event.compare }}.

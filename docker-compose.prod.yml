@@ -7,10 +7,8 @@ services:
       DB_DATABASE: ${DB_DATABASE}
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - 80:3000
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:80/post" ]
+      test: [ "CMD", "curl", "-f", "http://localhost:3000/post" ]
       interval: 20s
       timeout: 10s
       retries: 3
@@ -22,10 +20,11 @@ services:
     command: [ "npm", "run", "start" ]
     networks:
       - frontend
+      - prod
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "traefik.enable=true"
-      - "traefik.http.routers.maxdanprod.rule=Host(ec2-54-197-201-24.compute-1.amazonaws.com/`)"
+      - "traefik.http.routers.maxdanprod.rule=Host(`maxime.alpex.ovh`)"
       - "traefik.http.routers.maxdanprod.entrypoints=websecure"
       - "traefik.http.routers.maxdanprod.tls.certresolver=myresolver"
 
@@ -38,8 +37,8 @@ services:
       MARIADB_PASSWORD: ${DB_PASSWORD}
     volumes:
       - "./docker/mariadb/data:/var/lib/mariadb"
-    ports:
-      - 3307:3306
+    networks:
+      - prod
     healthcheck:
       test: '/usr/bin/mariadb --user=${DB_USER} --password=${DB_PASSWORD} --execute "SHOW DATABASES;"'
       interval: 20s
@@ -52,3 +51,4 @@ networks:
   frontend:
     external: true
     name: custom_frontend
+  prod:

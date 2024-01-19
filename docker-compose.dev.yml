@@ -22,12 +22,13 @@ services:
     command: [ "npm", "run", "start" ]
     networks:
       - frontend
+      - dev
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "traefik.enable=true"
-      - "traefik.http.routers.maxdanprod.rule=Host(ec2-54-197-201-24.compute-1.amazonaws.com/`)"
-      - "traefik.http.routers.maxdanprod.entrypoints=websecure"
-      - "traefik.http.routers.maxdanprod.tls.certresolver=myresolver"
+      - "traefik.http.routers.maxdandev.rule=Host(`54.197.201.24`)"
+      - "traefik.http.routers.maxdandev.entrypoints=websecure"
+      - "traefik.http.routers.maxdandev.tls.certresolver=myresolver"
 
   db:
     image: mariadb:11.2.2
@@ -38,8 +39,8 @@ services:
       MARIADB_PASSWORD: ${DB_PASSWORD}
     volumes:
       - "./docker/mariadb/data:/var/lib/mariadb"
-    ports:
-      - 3306:3306
+    networks:
+      - dev
     healthcheck:
       test: '/usr/bin/mariadb --user=${DB_USER} --password=${DB_PASSWORD} --execute "SHOW DATABASES;"'
       interval: 20s
@@ -52,3 +53,4 @@ networks:
   frontend:
     external: true
     name: custom_frontend
+  dev:
