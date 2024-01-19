@@ -1,7 +1,7 @@
 name: Lighthouse CI
 on:
   schedule:
-    - cron: '*/5 * * * *' # This will run the workflow every 5 minutes
+    - cron: '* * * * *' # This will run the workflow every 5 minutes
 
 jobs:
   lighthouse_audit:

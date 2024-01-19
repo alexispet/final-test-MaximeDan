@@ -109,12 +109,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name : Test env
-        run: |
-         echo test 1 : ${{ env.APP_URL }}
-         echo test 2 : ${{ vars.APP_URL }}
-         echo test 3 : ${{ secrets.APP_URL }}
-
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
