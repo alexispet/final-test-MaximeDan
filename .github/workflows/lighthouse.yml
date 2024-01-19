@@ -15,5 +15,4 @@ jobs:
         with:
             urls: |
                 ${{ vars.APP_URL }}
-            uploadArtifacts: true
             temporaryPublicStorage: true
