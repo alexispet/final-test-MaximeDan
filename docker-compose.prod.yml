@@ -14,6 +14,8 @@ services:
       retries: 3
       start_period: 10s
       start_interval: 5s
+    ports:
+      - "80:3000"
     depends_on:
       db:
         condition: service_healthy
@@ -23,10 +25,10 @@ services:
       - prod
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-      - "traefik.enable=true"
-      - "traefik.http.routers.maxdanprod.rule=Host(`maxime.alpex.ovh`)"
-      - "traefik.http.routers.maxdanprod.entrypoints=websecure"
-      - "traefik.http.routers.maxdanprod.tls.certresolver=myresolver"
+      # - "traefik.enable=true"
+      # - "traefik.http.routers.maxdanprod.rule=Host(`maxime.alpex.ovh`)"
+      # - "traefik.http.routers.maxdanprod.entrypoints=websecure"
+      # - "traefik.http.routers.maxdanprod.tls.certresolver=myresolver"
 
   db:
     image: mariadb:11.2.2

@@ -2,8 +2,8 @@
 # Y Social network API
 
 Name: Maxime Dandel
-Production URL: __________  
-Development URL: __________
+Production URL: http://maxime.alpex.ovh:80/post
+Development URL: http://ec2-54-197-201-24.compute-1.amazonaws.com:3000/post
 
 ## Description
 This is the official API for the Y Social Network. 
