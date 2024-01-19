@@ -1,7 +1,6 @@
 name: Lighthouse CI
-on:
-  schedule:
-    - cron: '* * * * *' # This will run the workflow every 5 minutes
+run-name: ${{github.actor }} Lighthouse job for production
+on: push
 
 jobs:
   lighthouse_audit:
