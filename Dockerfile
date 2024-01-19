@@ -6,6 +6,7 @@ WORKDIR /app
 RUN npm install
 
 FROM node:21.5.0-bullseye as expressapp
+LABEL org.opencontainers.image.source https://github.com/alexispet/final-test-MaximeDan
 
 WORKDIR /app
 
