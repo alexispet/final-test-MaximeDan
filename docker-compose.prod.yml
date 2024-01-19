@@ -20,9 +20,14 @@ services:
       db:
         condition: service_healthy
     command: [ "npm", "run", "start" ]
+    networks:
+      - frontend
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-
+      - "traefik.enable=true"
+      - "traefik.http.routers.maxdanprod.rule=Host(ec2-54-197-201-24.compute-1.amazonaws.com/`)"
+      - "traefik.http.routers.maxdanprod.entrypoints=websecure"
+      - "traefik.http.routers.maxdanprod.tls.certresolver=myresolver"
 
   db:
     image: mariadb:11.2.2
@@ -42,3 +47,8 @@ services:
       retries: 3
       start_period: 10s
       start_interval: 5s
+
+networks:
+  frontend:
+    external: true
+    name: custom_frontend
