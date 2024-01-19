@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "lint": "eslint . --ext .js",
     "dev": "nodemon app.js",
     "start": "node app.js",
     "test": "mocha tests/**/*.test.js --exit",
@@ -20,6 +21,7 @@
     "mariadb": "^3.2.3"
   },
   "devDependencies": {
+    "eslint": "^8.56.0",
     "mocha": "^10.2.0",
     "nodemon": "^3.0.3",
     "supertest": "^6.3.3"
