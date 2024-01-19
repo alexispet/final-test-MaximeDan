@@ -131,7 +131,6 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
     
   notify:
-    needs: [build-docker-dev, build-docker-prod]
     runs-on: ubuntu-latest
     steps:
       - name: Shoutrrr
