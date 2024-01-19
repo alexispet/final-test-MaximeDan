@@ -20,6 +20,9 @@ services:
       db:
         condition: service_healthy
     command: [ "npm", "run", "start" ]
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
 
   db:
     image: mariadb:11.2.2
