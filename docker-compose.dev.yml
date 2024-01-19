@@ -27,7 +27,7 @@ services:
       - "com.centurylinklabs.watchtower.enable=true"
       - "traefik.enable=true"
       - "traefik.http.routers.maxdandev.rule=Host(`54.197.201.24`)"
-      - "traefik.http.routers.maxdandev.entrypoints=websecure"
+      - "traefik.http.routers.maxdandev.entrypoints=web"
       - "traefik.http.routers.maxdandev.tls.certresolver=myresolver"
 
   db:
