@@ -64,7 +64,7 @@ jobs:
     if: github.ref_type == 'tag' || github.ref_name == 'main'
     environment:
       name: production
-      url: ${{ env.APP_URL }}
+      url: ${{ vars..APP_URL }}
     permissions:
       contents: read
       packages: write
@@ -100,7 +100,7 @@ jobs:
     if: github.ref_name == 'develop'
     environment:
       name: development
-      url: ${{ env.APP_URL }}
+      url: ${{ vars..APP_URL }}
     permissions:
       contents: read
       packages: write
