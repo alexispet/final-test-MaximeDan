@@ -1,8 +1,5 @@
 name: Lighthouse CI
 run-name: ${{github.actor }} Lighthouse job for production
-on: 
-  schedule:
-    - cron: '0 16 * * *'
 
 jobs:
   lighthouse_audit:
